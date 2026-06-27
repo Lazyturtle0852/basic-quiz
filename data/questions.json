@@ -1,0 +1,336 @@
+{
+  "meta": {
+    "title": "LiT Basic チェック",
+    "estimatedMinutes": 30
+  },
+  "categories": {
+    "cli": { "label": "CLI（コマンドライン）", "count": 3 },
+    "html": { "label": "HTML", "count": 6 },
+    "css": { "label": "CSS", "count": 3 },
+    "ruby": { "label": "Ruby", "count": 5 },
+    "sinatra": { "label": "Sinatra", "count": 12 }
+  },
+  "questions": [
+    {
+      "id": "cli-01",
+      "category": "cli",
+      "type": "choice",
+      "question": "ターミナルで「今いるフォルダの中に何があるか」を確認したい。使うコマンドはどれ？",
+      "choices": ["cd", "ls", "mkdir", "rm"],
+      "answer": 1,
+      "explanation": "ls はカレントディレクトリのファイル・フォルダ一覧を表示します。cd は移動、mkdir は作成、rm は削除です。"
+    },
+    {
+      "id": "cli-02",
+      "category": "cli",
+      "type": "text",
+      "question": "今いるフォルダから、ひとつ上の階層（親フォルダ）へ移動するコマンドを書いてください。",
+      "answer": ["cd ..", "cd.."],
+      "explanation": "cd .. で親ディレクトリに移る。.. は「一つ上のフォルダ」を表す相対パスです。"
+    },
+    {
+      "id": "cli-03",
+      "category": "cli",
+      "type": "choice",
+      "question": "一つ下にある Desktop フォルダへ移動したい。適切なコマンドは？",
+      "choices": [
+        "cd Desktop",
+        "cd /Desktop",
+        "ls Desktop",
+        "cd ~/Desktop/Desktop"
+      ],
+      "answer": 0,
+      "explanation": "今いる場所からの相対パスなら cd Desktop。/Desktop はルート直下を指す絶対パスで、この状況では意図と異なります。"
+    },
+    {
+      "id": "html-01",
+      "category": "html",
+      "type": "choice",
+      "question": "ページ本文の「最も大きな見出し」をマークアップするタグはどれ？",
+      "choices": ["<p>", "<h1>", "<title>", "<head>"],
+      "answer": 1,
+      "explanation": "h1 が本文中の最大見出しです。title はブラウザタブのタイトル、p は段落です。"
+    },
+    {
+      "id": "html-02",
+      "category": "html",
+      "type": "choice",
+      "question": "別ページへ遷移するリンクを作るタグと、リンク先を指定する属性の組み合わせとして正しいのは？",
+      "choices": [
+        "<a> タグ + href 属性",
+        "<link> タグ + href 属性",
+        "<a> タグ + src 属性",
+        "<url> タグ + to 属性"
+      ],
+      "answer": 0,
+      "explanation": "a タグの href に URL を書きます。link タグは CSS 読み込みなど、src は img などで使います。"
+    },
+    {
+      "id": "html-03",
+      "category": "html",
+      "type": "choice",
+      "question": "フォームでユーザーにニックネームを1行入力してもらうフィールド。適切な input の type は？",
+      "choices": ["text", "submit", "password", "button"],
+      "answer": 0,
+      "explanation": "type=\"text\" は1行の文字列入力用です。submit は送信ボタン、password は伏字入力用です。"
+    },
+    {
+      "id": "html-04",
+      "category": "html",
+      "type": "choice",
+      "question": "パスワードを入力させたい（入力文字を画面に表示したくない）。適切な input の type は？",
+      "choices": ["password", "text", "hidden", "secret"],
+      "answer": 0,
+      "explanation": "type=\"password\" は入力が ● で表示され、パスワード入力に使います。text だとそのまま見えてしまいます。"
+    },
+    {
+      "id": "html-05",
+      "category": "html",
+      "type": "choice",
+      "question": "フォームの入力内容をサーバーに送信するボタンを作る。適切な input の type は？",
+      "choices": ["submit", "button", "send", "post"],
+      "answer": 0,
+      "explanation": "type=\"submit\" がフォーム送信ボタンです。button は送信しない通常ボタン、post は type の値ではありません。"
+    },
+    {
+      "id": "html-06",
+      "category": "html",
+      "type": "choice",
+      "question": "input の name 属性は、Sinatra 側で params から値を取り出すとき何に対応する？",
+      "choices": [
+        "params のキー名（:name の name 部分）",
+        "input の type の値",
+        "erb ファイル名",
+        "form の action の URL"
+      ],
+      "answer": 0,
+      "explanation": "name=\"email\" と書けば Sinatra では params[:email] で値を取得します。name が params のキーになります。"
+    },
+    {
+      "id": "css-01",
+      "category": "css",
+      "type": "choice",
+      "question": "HTML で class=\"menu-item\" と指定した要素すべてにスタイルを当てる CSS セレクタは？",
+      "choices": [".menu-item", "#menu-item", "menu-item", "*menu-item"],
+      "answer": 0,
+      "explanation": "クラスセレクタは .クラス名。# は id、タグ名だけは要素セレクタです。"
+    },
+    {
+      "id": "css-02",
+      "category": "css",
+      "type": "choice",
+      "question": "ボタンの「文字と枠線の間」の余白を広げたい。使うプロパティは？",
+      "choices": ["margin", "padding", "border-width", "font-size"],
+      "answer": 1,
+      "explanation": "padding は要素の内側の余白、margin は外側の余白です。文字と枠の間＝内側なので padding。"
+    },
+    {
+      "id": "css-03",
+      "category": "css",
+      "type": "choice",
+      "question": "見出しテキストを要素の中央に寄せたい。正しい指定は？",
+      "choices": [
+        "text-align: center;",
+        "align: center;",
+        "margin: center;",
+        "position: center;"
+      ],
+      "answer": 0,
+      "explanation": "text-align: center; でテキストの水平方向の配置を変えられます。"
+    },
+    {
+      "id": "ruby-01",
+      "category": "ruby",
+      "type": "choice",
+      "question": "次の Ruby コードを実行したとき、ターミナルに表示される内容は？",
+      "code": "puts \"Hello, World!\"",
+      "choices": ["Hello, World!", "puts \"Hello, World!\"", "エラー", "何も表示されない"],
+      "answer": 0,
+      "explanation": "puts は引数の文字列を出力します。コードそのものではなく Hello, World! が表示されます。"
+    },
+    {
+      "id": "ruby-02",
+      "category": "ruby",
+      "type": "choice",
+      "question": "次のコード実行後、puts result の出力は？",
+      "code": "age = 15\nresult = age >= 18\nputs result",
+      "choices": ["false", "true", "15", "18"],
+      "answer": 0,
+      "explanation": "15 >= 18 は false です。>= は「以上」の比較演算子。"
+    },
+    {
+      "id": "ruby-03",
+      "category": "ruby",
+      "type": "choice",
+      "question": "次のコードで fruits[1] の値は？",
+      "code": "fruits = [\"apple\", \"banana\", \"cherry\"]",
+      "choices": ["banana", "apple", "cherry", "1"],
+      "answer": 0,
+      "explanation": "配列のインデックスは 0 から。apple=0, banana=1, cherry=2。"
+    },
+    {
+      "id": "ruby-04",
+      "category": "ruby",
+      "type": "choice",
+      "question": "次のコードを実行したとき、ターミナルに表示される行は？",
+      "code": "[10, 20, 30].each do |n|\n  puts n * 2\nend",
+      "choices": [
+        "20, 40, 60 が3行",
+        "10, 20, 30 が3行",
+        "60 が1行だけ",
+        "何も表示されない"
+      ],
+      "answer": 0,
+      "explanation": "each で各要素 n に対し puts n * 2 を実行。10→20, 20→40, 30→60 がそれぞれ1行ずつ出力されます。"
+    },
+    {
+      "id": "ruby-06",
+      "category": "ruby",
+      "type": "choice",
+      "question": "メソッド内で score = 100 と書いた変数を、メソッドの外から参照できないのはなぜ？",
+      "choices": [
+        "ローカル変数のスコープがメソッド内に限られるから",
+        "Ruby では数値を変数に入れられないから",
+        "puts していないから",
+        "メソッド名がないから"
+      ],
+      "answer": 0,
+      "explanation": "メソッド内のローカル変数はそのメソッドの中だけ有効（スコープ）です。外から使うには戻り値やインスタンス変数など別の仕組みが必要です。"
+    },
+    {
+      "id": "sinatra-01",
+      "category": "sinatra",
+      "type": "choice",
+      "question": "Sinatra アプリで「URL ごとの処理（ルーティング）」を書くメインファイルはどれ？",
+      "choices": ["app.rb", "index.erb", "Gemfile", "public/style.css"],
+      "answer": 0,
+      "explanation": "app.rb が Sinatra アプリの中心です。get/post でルートを定義し、erb で views 内のテンプレートを表示します。"
+    },
+    {
+      "id": "sinatra-02",
+      "category": "sinatra",
+      "type": "choice",
+      "question": "CSS や画像を置くフォルダは？",
+      "choices": ["public", "views", "app", "routes"],
+      "answer": 0,
+      "explanation": "public フォルダ内のファイルは URL から直接アクセスできます。views は erb テンプレート用です。"
+    },
+    {
+      "id": "sinatra-03",
+      "category": "sinatra",
+      "type": "text",
+      "question": "app.rb の空欄に入るメソッド名を書いてください。views/index.erb を表示するための Sinatra メソッドです。",
+      "code": "get '/' do\n  ______ :index\nend",
+      "answer": ["erb"],
+      "explanation": "erb :index で views/index.erb を HTML に変換して返します。:index は views/index.erb に対応します。"
+    },
+    {
+      "id": "sinatra-04",
+      "category": "sinatra",
+      "type": "text",
+      "question": "index.erb の空欄に入る式を書いてください。app.rb で @title = \"ようこそ\" と設定済みです。",
+      "code": "<h1><%= ______ %></h1>",
+      "answer": ["@title"],
+      "explanation": "<%= ... %> は Ruby の値を HTML に埋め込みます。インスタンス変数 @title の値がここに出力されます。"
+    },
+    {
+      "id": "sinatra-05",
+      "category": "sinatra",
+      "type": "choice",
+      "question": "get と post の使い分けとして正しいのは？",
+      "choices": [
+        "ページを表示するだけ → get / フォームでデータを送る → post",
+        "どちらもデータ送信専用",
+        "get は post より速いから常に get を使う",
+        "post はページ表示専用、get はフォーム送信用"
+      ],
+      "answer": 0,
+      "explanation": "Basic では get でページ表示、post でフォーム送信データの受け取りが基本です。Sinatra では get '/' do と post '/register' do のように書き分けます。"
+    },
+    {
+      "id": "sinatra-06",
+      "category": "sinatra",
+      "type": "choice",
+      "question": "HTML 側に `<form method=\"post\" action=\"/register\">` があるとき、app.rb でフォーム送信を受け取る正しい書き方は？",
+      "choices": [
+        "post '/register' do ... end",
+        "get '/register' do ... end",
+        "form '/register' do ... end",
+        "post '/register'"
+      ],
+      "answer": 0,
+      "explanation": "form の method=\"post\" に対応するのは post ルートです。action のパス /register と一致させます。"
+    },
+    {
+      "id": "sinatra-07",
+      "category": "sinatra",
+      "type": "text",
+      "question": "空欄に入るキー名を書いてください。name 属性と params のキーは一致します。",
+      "code": "<input type=\"text\" name=\"nickname\">\n\n# app.rb\nvalue = params[:______]",
+      "answer": ["nickname", ":nickname"],
+      "explanation": "name=\"nickname\" なら params[:nickname] で送信値を取得できます。"
+    },
+    {
+      "id": "sinatra-08",
+      "category": "sinatra",
+      "type": "text",
+      "question": "空欄に入るキー名を書いてください。",
+      "code": "<input type=\"password\" name=\"password\">\n\n# app.rb\npass = params[:______]",
+      "answer": ["password", ":password"],
+      "explanation": "type は password でも、params のキーは name 属性の値（password）です。"
+    },
+    {
+      "id": "sinatra-09",
+      "category": "sinatra",
+      "type": "choice",
+      "question": "次のフォームが送信されたあと、username の入力値を Sinatra で取り出す正しい書き方は？",
+      "code": "<form method=\"post\" action=\"/signup\">\n  <input type=\"text\" name=\"username\">\n  <input type=\"password\" name=\"password\">\n  <input type=\"submit\" value=\"登録\">\n</form>",
+      "choices": [
+        "params[:username]",
+        "params[:text]",
+        "params[:submit]",
+        "@username"
+      ],
+      "answer": 0,
+      "explanation": "params のキーは input の name 属性と一致します。username フィールドは name=\"username\" なので params[:username] です。submit ボタンの value は通常使いません。"
+    },
+    {
+      "id": "sinatra-10",
+      "category": "sinatra",
+      "type": "choice",
+      "question": "同じフォームで、password フィールドの送信値を取り出す正しい書き方は？",
+      "code": "<form method=\"post\" action=\"/signup\">\n  <input type=\"text\" name=\"username\">\n  <input type=\"password\" name=\"password\">\n  <input type=\"submit\" value=\"登録\">\n</form>",
+      "choices": [
+        "params[:password]",
+        "params[:text]",
+        "params[:secret]",
+        "params[:submit]"
+      ],
+      "answer": 0,
+      "explanation": "name=\"password\" なので params[:password]。type の値（password）ではなく name の値がキーになります。"
+    },
+    {
+      "id": "sinatra-11",
+      "category": "sinatra",
+      "type": "choice",
+      "question": "フォームで受け取った nickname を確認画面（confirm.erb）に表示したい。正しい処理の流れは？",
+      "choices": [
+        "post ルートで params[:nickname] を @nickname に代入 → erb :confirm",
+        "get ルートで params[:nickname] を読む → erb :confirm",
+        "post ルートで nickname = params と書く → redirect :confirm",
+        "form タグに @nickname を書く → get '/'"
+      ],
+      "answer": 0,
+      "explanation": "post で params から値を受け取り、@nickname に代入して erb で confirm.erb に渡します。erb 内では <%= @nickname %> で表示します。"
+    },
+    {
+      "id": "sinatra-12",
+      "category": "sinatra",
+      "type": "text",
+      "question": "登録処理が終わったあと、ブラウザをトップページ（/）へ誘導するメソッド呼び出しの空欄を書いてください。",
+      "code": "post '/register' do\n  # ... 処理 ...\n  ______ '/'\nend",
+      "answer": ["redirect"],
+      "explanation": "redirect '/' で別 URL へリダイレクト（画面遷移）します。フォーム送信後によく使います。"
+    }
+  ]
+}

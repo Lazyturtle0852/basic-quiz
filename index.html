@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LiT Basic チェッククイズ</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- 開始画面 -->
+    <section id="screen-start" class="screen active">
+      <header class="hero">
+        <h1>LiT Basic チェッククイズ</h1>
+        <p class="subtitle">Basic コースで学んだ内容の理解度チェック</p>
+      </header>
+      <div class="info-card">
+        <p><strong>全 <span id="total-questions">22</span> 問</strong> · 目安 <strong>約30分</strong></p>
+        <ul class="category-list" id="category-list"></ul>
+        <p class="hint">各問題の回答後に解説が表示されます。終了後にカテゴリ別のサマリーを確認できます。</p>
+      </div>
+      <button type="button" id="btn-start" class="btn btn-primary">クイズを開始</button>
+    </section>
+
+    <!-- クイズ画面 -->
+    <section id="screen-quiz" class="screen">
+      <div class="quiz-header">
+        <span id="progress-label" class="progress-label">1 / 22</span>
+        <span id="category-badge" class="category-badge"></span>
+      </div>
+      <div class="progress-bar">
+        <div id="progress-fill" class="progress-fill"></div>
+      </div>
+      <div id="question-area" class="question-area"></div>
+      <div id="feedback-area" class="feedback-area hidden"></div>
+      <div class="quiz-actions">
+        <button type="button" id="btn-submit" class="btn btn-primary">回答する</button>
+        <button type="button" id="btn-next" class="btn btn-primary hidden">次の問題へ</button>
+      </div>
+    </section>
+
+    <!-- サマリー画面 -->
+    <section id="screen-summary" class="screen">
+      <header class="hero">
+        <h1>結果サマリー</h1>
+        <p id="summary-score" class="score-display"></p>
+      </header>
+      <div id="summary-message" class="summary-message"></div>
+      <div id="category-chart" class="category-chart"></div>
+      <div id="weak-areas" class="weak-areas"></div>
+      <div id="wrong-list" class="wrong-list"></div>
+      <button type="button" id="btn-restart" class="btn btn-secondary">もう一度挑戦</button>
+    </section>
+  </div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
