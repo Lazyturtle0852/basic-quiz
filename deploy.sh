@@ -11,16 +11,20 @@ if ! gh auth status >/dev/null 2>&1; then
   exit 1
 fi
 
-if ! git remote get-url origin >/dev/null 2>&1; then
-  git remote add origin "https://github.com/${REPO}.git"
+REMOTE_URL="https://github.com/${REPO}.git"
+if git remote get-url origin >/dev/null 2>&1; then
+  git remote set-url origin "$REMOTE_URL"
+else
+  git remote add origin "$REMOTE_URL"
 fi
 
 if gh repo view "$REPO" >/dev/null 2>&1; then
   echo "リポジトリは存在します。push します..."
   git push -u origin main
 else
-  echo "リポジトリを作成して push します..."
-  gh repo create lit-basic-quiz --public --source=. --remote=origin --push
+  echo "リポジトリを作成します..."
+  gh repo create lit-basic-quiz --public
+  git push -u origin main
 fi
 
 echo "GitHub Pages を有効化..."
