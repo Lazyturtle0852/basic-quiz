@@ -1,6 +1,6 @@
-# LiT Basic チェッククイズ
+# Basic チェッククイズ
 
-Life is Tech! Basic コースの理解度チェック用クイズサイトです。
+理解度チェック用クイズサイトです。
 
 - 全29問（CLI 3 / HTML 6 / CSS 3 / Ruby 5 / Sinatra 12）
 - 選択式 + 記述式（短答）
@@ -11,7 +11,7 @@ Life is Tech! Basic コースの理解度チェック用クイズサイトです
 
 ## 公開 URL（GitHub Pages）
 
-**https://lazyturtle0852.github.io/lit-basic-quiz/**
+**https://lazyturtle0852.github.io/basic-quiz/**
 
 問題を更新したら `git push` するだけで数分後に反映されます。
 
