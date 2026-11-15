@@ -3,7 +3,7 @@
 理解度チェック用クイズサイトです。
 
 - 全29問（CLI 3 / HTML 6 / CSS 3 / Ruby 5 / Sinatra 12）
-- 選択式 + 記述式（短答）
+- 選択式（4択）
 - 各問の回答後に解説表示
 - 終了後にカテゴリ別サマリー・苦手分野アドバイス
 
@@ -20,7 +20,7 @@
 同一 Wi-Fi 上の受講生に URL を共有して使います。
 
 ```bash
-cd "/Users/ryoma/Desktop/Obsidian/02_Career/インターン/Life is Tech/basic-quiz"
+cd "/Users/ryoma/Desktop/Obsidian/02_Career/internships/Life is Tech/basic-quiz"
 ./start.sh
 ```
 
