@@ -88,9 +88,10 @@ function showFeedback(question, isCorrect, userAnswer) {
   els.feedbackArea.classList.toggle('incorrect', !isCorrect);
 
   const correctText = getCorrectAnswerText(question);
+  const userText = question.type === 'choice' ? question.choices[Number(userAnswer)] : userAnswer;
   els.feedbackArea.innerHTML = `
     <p class="feedback-result">${isCorrect ? '正解！' : '不正解'}</p>
-    ${!isCorrect ? `<p>あなたの回答: ${escapeHtml(String(userAnswer ?? '（未回答）'))}</p><p>正解: ${escapeHtml(correctText)}</p>` : ''}
+    ${!isCorrect ? `<p>あなたの回答: ${escapeHtml(String(userText ?? '（未回答）'))}</p><p>正解: ${escapeHtml(correctText)}</p>` : ''}
     <p class="feedback-explanation"><strong>解説</strong>${escapeHtml(question.explanation)}</p>
   `;
 
@@ -140,7 +141,7 @@ function handleNext() {
 }
 
 function finishQuiz() {
-  renderSummary(results, quizData.categories, {
+  renderSummary(results, quizData.categories, quizData.meta, {
     score: els.summaryScore,
     message: els.summaryMessage,
     chart: els.categoryChart,
@@ -162,7 +163,7 @@ function startQuiz() {
 
 async function init() {
   try {
-    quizData = await loadQuestions();
+    quizData = await loadQuestions(document.body.dataset.questions);
     initStartScreen();
   } catch (err) {
     els.categoryList.innerHTML = `<li style="color:red">${err.message}</li>`;

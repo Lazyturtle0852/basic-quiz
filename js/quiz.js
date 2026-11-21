@@ -1,5 +1,5 @@
-export async function loadQuestions() {
-  const res = await fetch('data/questions.json');
+export async function loadQuestions(path = 'data/questions.json') {
+  const res = await fetch(path);
   if (!res.ok) throw new Error('問題データの読み込みに失敗しました');
   return res.json();
 }
@@ -65,6 +65,7 @@ export function renderQuestion(question, container) {
 
       const span = document.createElement('span');
       span.textContent = choice;
+      if (choice.includes('\n')) span.className = 'choice-code';
 
       label.appendChild(radio);
       label.appendChild(span);

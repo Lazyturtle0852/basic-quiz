@@ -1,0 +1,457 @@
+{
+  "meta": {
+    "title": "LiT チェッククイズ むずかしい版",
+    "estimatedMinutes": 30,
+    "messages": {
+      "high": "よくできました！Step Up のログインまでの内容がしっかり身についています。",
+      "mid": "おおむね理解できています。苦手なカテゴリの解説を読み返してから、DBアーキテクト2に進みましょう。",
+      "low": "復習のチャンスです。解説を読みながら、もう一度挑戦してみましょう。",
+      "allGood": "この調子で DBアーキテクト2（1対多）に進みましょう。"
+    }
+  },
+  "categories": {
+    "basic": {
+      "label": "Basic 応用",
+      "tip": "相対パス、子孫セレクタ、ハッシュのキー（シンボルと文字列）、<% %> と <%= %>、post の後の redirect を見直しましょう",
+      "count": 8
+    },
+    "db": {
+      "label": "データベース設計",
+      "tip": "テーブル・カラム・レコードの関係と、データに合う型（integer / string / boolean など）、主キー id を復習しましょう",
+      "count": 4
+    },
+    "ar": {
+      "label": "ActiveRecord",
+      "tip": "create_migration → migrate の順番、モデル名（単数）とテーブル名（複数）の対応、timestamps を確認しましょう",
+      "count": 5
+    },
+    "crud": {
+      "label": "CRUD（作成・表示・更新・削除）",
+      "tip": "create / all / find / save / destroy の使い分けと、:id を使ったルート・フォームの送信先を復習しましょう",
+      "count": 6
+    },
+    "login": {
+      "label": "ログイン",
+      "tip": "has_secure_password と authenticate、enable :sessions、session[:user] の入れ方と消し方を確認しましょう",
+      "count": 6
+    }
+  },
+  "questions": [
+    {
+      "id": "basic-01",
+      "category": "basic",
+      "type": "choice",
+      "question": "今いる場所は /Users/lit/myapp/views。次のコマンドを実行すると、どこに移動する？",
+      "code": "cd ../public",
+      "choices": [
+        "/Users/lit/myapp/views/public",
+        "/Users/lit/public",
+        "/Users/lit/myapp/public",
+        "エラーになる"
+      ],
+      "answer": 2,
+      "explanation": ".. はひとつ上のフォルダ（/Users/lit/myapp）。そこから public に入るので /Users/lit/myapp/public です。"
+    },
+    {
+      "id": "basic-02",
+      "category": "basic",
+      "type": "choice",
+      "question": "次の CSS は、どの要素の文字を赤くする？",
+      "code": ".card p {\n  color: red;\n}",
+      "choices": [
+        "class=\"card\" の要素そのもの",
+        "class=\"card\" の要素の中にある p",
+        "すべての p と、class=\"card\" の要素",
+        "p の中にある class=\"card\" の要素"
+      ],
+      "answer": 1,
+      "explanation": "セレクタをスペースで区切ると「左の要素の中にある右の要素」（子孫セレクタ）を指します。.card の中の p だけが赤くなります。"
+    },
+    {
+      "id": "basic-03",
+      "category": "basic",
+      "type": "choice",
+      "question": "次のコードを実行すると、何と表示される？",
+      "code": "total = 0\n[3, 5, 7].each do |n|\n  total += n if n > 4\nend\nputs total",
+      "choices": [
+        "15",
+        "3",
+        "12",
+        "7"
+      ],
+      "answer": 2,
+      "explanation": "if n > 4 の条件を満たす 5 と 7 だけが足されるので、5 + 7 = 12 です。"
+    },
+    {
+      "id": "basic-04",
+      "category": "basic",
+      "type": "choice",
+      "question": "次のコードを実行すると、何と表示される？",
+      "code": "user = {name: \"Bilson\", age: 16}\nputs user[\"age\"]",
+      "choices": [
+        "16",
+        "\"age\"",
+        "エラーになる",
+        "空行が出るだけ（user[\"age\"] は nil）"
+      ],
+      "answer": 3,
+      "explanation": "{age: 16} のキーはシンボル :age です。文字列 \"age\" とは別のキーなので user[\"age\"] は nil になり、puts nil は空行を出すだけです。user[:age] と書けば 16 が取れます。"
+    },
+    {
+      "id": "basic-05",
+      "category": "basic",
+      "type": "choice",
+      "question": "次のコードを実行すると、何と表示される？",
+      "code": "def double(n)\n  n * 2\nend\nputs double(3) + 1",
+      "choices": [
+        "7",
+        "6",
+        "8",
+        "エラーになる"
+      ],
+      "answer": 0,
+      "explanation": "Ruby のメソッドは最後に評価した値を返します（return を省略できる）。double(3) は 6 なので、6 + 1 = 7 です。"
+    },
+    {
+      "id": "basic-06",
+      "category": "basic",
+      "type": "choice",
+      "question": "app.rb が次のとき、ブラウザで /hello/taro を開いた。params[:name] の値は？",
+      "code": "get '/hello/:name' do\n  @name = params[:name]\n  erb :hello\nend",
+      "choices": [
+        "\"hello\"",
+        "\"taro\"",
+        "\"/hello/taro\"",
+        "nil"
+      ],
+      "answer": 1,
+      "explanation": "ルートの :name の部分は、URL のその位置に入った文字列になります。/hello/taro なら params[:name] は \"taro\" です。"
+    },
+    {
+      "id": "basic-07",
+      "category": "basic",
+      "type": "choice",
+      "question": "erb で、Ruby のコードを実行するだけで画面には何も出さない書き方は？",
+      "choices": [
+        "<%= %>",
+        "<!-- -->",
+        "<% %>",
+        "{{ }}"
+      ],
+      "answer": 2,
+      "explanation": "<% %> は実行だけ、<%= %> は実行した結果を画面に出します。each や if の行には <% %> を使います。"
+    },
+    {
+      "id": "basic-08",
+      "category": "basic",
+      "type": "choice",
+      "question": "フォームを post で送ったあと、erb を直接返さずに redirect する主な理由は？",
+      "choices": [
+        "画面の表示が速くなるから",
+        "post では erb が使えないから",
+        "パスワードを暗号化するため",
+        "ブラウザを再読み込みしたときに同じ送信が繰り返されるのを防ぐため"
+      ],
+      "answer": 3,
+      "explanation": "post の結果をそのまま表示すると、再読み込みで同じデータがもう一度送られます。redirect で get のページへ移しておくと、再読み込みしても get が繰り返されるだけです。post でも erb は使えます。"
+    },
+    {
+      "id": "db-01",
+      "category": "db",
+      "type": "choice",
+      "question": "服薬記録を保存するテーブルを考える。1回分の記録（例:「11/20 朝 頭痛薬 2錠」）は、テーブルの何にあたる？",
+      "choices": [
+        "レコード（行）",
+        "カラム（列）",
+        "テーブル",
+        "データベース"
+      ],
+      "answer": 0,
+      "explanation": "1件分のデータが横一行に入るのがレコード（行）です。「日付」「薬の名前」「錠数」のような項目がカラム（列）です。"
+    },
+    {
+      "id": "db-02",
+      "category": "db",
+      "type": "choice",
+      "question": "「飲んだ錠数」を保存するカラムの型として、いちばん合うのは？",
+      "choices": [
+        "string",
+        "integer",
+        "boolean",
+        "text"
+      ],
+      "answer": 1,
+      "explanation": "錠数は整数なので integer が合います。string にすると \"2\" という文字として扱われ、足し算や並べ替えが数として働きません。"
+    },
+    {
+      "id": "db-03",
+      "category": "db",
+      "type": "choice",
+      "question": "テーブルを作ると自動で付く id カラムについて、正しいのは？",
+      "choices": [
+        "同じテーブルの中で値が重ならず、1件のレコードを特定するのに使う",
+        "自分で毎回入力しないといけない",
+        "レコードを削除すると、ほかのレコードの id が詰められる",
+        "ユーザーのパスワードを入れておく場所"
+      ],
+      "answer": 0,
+      "explanation": "id は主キーで、レコードを作ると自動で番号が振られます。重ならないので find(id) や /records/3 のように1件を指定するのに使えます。削除しても他の id は変わりません。"
+    },
+    {
+      "id": "db-04",
+      "category": "db",
+      "type": "choice",
+      "question": "「お気に入り登録したかどうか」を保存したい。いちばん合う型は？",
+      "choices": [
+        "integer",
+        "date",
+        "boolean",
+        "string"
+      ],
+      "answer": 2,
+      "explanation": "はい／いいえの2択は boolean（true / false）が合います。"
+    },
+    {
+      "id": "ar-01",
+      "category": "ar",
+      "type": "choice",
+      "question": "medicines テーブルを作るマイグレーションファイルを作りたい。正しいコマンドは？",
+      "choices": [
+        "bundle exec rake db:migrate NAME=create_medicines",
+        "bundle exec rake db:create_migration NAME=create_medicines",
+        "bundle exec ruby app.rb",
+        "rails generate model Medicine"
+      ],
+      "answer": 1,
+      "explanation": "マイグレーションファイルは rake db:create_migration で作ります。db/migrate に日時付きのファイルができるので、中身を書いてから db:migrate します。"
+    },
+    {
+      "id": "ar-02",
+      "category": "ar",
+      "type": "choice",
+      "question": "マイグレーションファイルを書き終えた。データベースに反映するコマンドは？",
+      "choices": [
+        "bundle exec rake db:create_migration",
+        "bundle install",
+        "bundle exec rake db:migrate",
+        "ruby models.rb"
+      ],
+      "answer": 2,
+      "explanation": "rake db:migrate で、まだ実行していないマイグレーションが実行され、テーブルが作られます。"
+    },
+    {
+      "id": "ar-03",
+      "category": "ar",
+      "type": "choice",
+      "question": "テーブル名が medicines のとき、models.rb に書くモデルのクラスは？",
+      "choices": [
+        "class Medicines < ActiveRecord::Base",
+        "class medicine < ActiveRecord::Base",
+        "class Medicine < Sinatra::Base",
+        "class Medicine < ActiveRecord::Base"
+      ],
+      "answer": 3,
+      "explanation": "モデル名は単数形・先頭大文字（Medicine）、テーブル名は複数形（medicines）という対応で、ActiveRecord::Base を継承します。"
+    },
+    {
+      "id": "ar-04",
+      "category": "ar",
+      "type": "choice",
+      "question": "次のマイグレーションの t.timestamps で追加されるカラムは？",
+      "code": "create_table :medicines do |t|\n  t.string :name\n  t.integer :count\n  t.timestamps null: false\nend",
+      "choices": [
+        "created_at と updated_at",
+        "id",
+        "date と time",
+        "timestamps という1つのカラム"
+      ],
+      "answer": 0,
+      "explanation": "t.timestamps は作成日時 created_at と更新日時 updated_at の2つを追加し、保存や更新のときに自動で値が入ります。"
+    },
+    {
+      "id": "ar-05",
+      "category": "ar",
+      "type": "choice",
+      "question": "db:migrate 済みのマイグレーションファイルに t.string :memo を書き足し、もう一度 db:migrate した。どうなる？",
+      "choices": [
+        "memo カラムが追加される",
+        "テーブルが作り直されてデータが消える",
+        "何も変わらない（実行済みのファイルは再実行されない）",
+        "エラーで止まる"
+      ],
+      "answer": 2,
+      "explanation": "一度実行したマイグレーションは記録されていて、もう実行されません。カラムを足すときは新しいマイグレーション（add_column など）を作ります。"
+    },
+    {
+      "id": "crud-01",
+      "category": "crud",
+      "type": "choice",
+      "question": "フォームから送られた name と count で、新しい記録を保存する書き方は？",
+      "choices": [
+        "Medicine.new(name: params[:name], count: params[:count])",
+        "Medicine.create(name: params[:name], count: params[:count])",
+        "Medicine.find(name: params[:name], count: params[:count])",
+        "Medicine.all(name: params[:name], count: params[:count])"
+      ],
+      "answer": 1,
+      "explanation": "create は作成と保存を一度に行います。new はオブジェクトを作るだけで、save するまでデータベースには入りません。"
+    },
+    {
+      "id": "crud-02",
+      "category": "crud",
+      "type": "choice",
+      "question": "トップページで記録を一覧表示したい。app.rb と index.erb の組み合わせで正しいのは？",
+      "choices": [
+        "@medicines = Medicine.all と <% @medicines.each do |m| %> … <% end %>",
+        "@medicines = Medicine.all と <%= @medicines %>",
+        "medicines = Medicine.all と <% medicines.each do |m| %> … <% end %>",
+        "@medicines = Medicine.find と <% @medicines.each do |m| %> … <% end %>"
+      ],
+      "answer": 0,
+      "explanation": "erb に渡すには @ つきのインスタンス変数にします。all は全件の集まりを返すので、each で1件ずつ取り出して表示します。"
+    },
+    {
+      "id": "crud-03",
+      "category": "crud",
+      "type": "choice",
+      "question": "/medicines/3 を開いたとき、id が 3 の記録を1件取り出すコードは？",
+      "code": "get '/medicines/:id' do\n  @medicine = ________\n  erb :show\nend",
+      "choices": [
+        "Medicine.all(params[:id])",
+        "Medicine.create(params[:id])",
+        "Medicine.find(params[:id])",
+        "Medicine.where(3)"
+      ],
+      "answer": 2,
+      "explanation": "find は id を指定して1件取り出します。ルートを get '/medicines/:id' にしておくと params[:id] に \"3\" が入ります。"
+    },
+    {
+      "id": "crud-04",
+      "category": "crud",
+      "type": "choice",
+      "question": "次のコードで錠数を変えたのに、データベースの値が変わらなかった。足りないのは？",
+      "code": "post '/medicines/:id/update' do\n  medicine = Medicine.find(params[:id])\n  medicine.count = params[:count]\n  redirect '/'\nend",
+      "choices": [
+        "medicine.create",
+        "Medicine.all",
+        "redirect '/'",
+        "medicine.save"
+      ],
+      "answer": 3,
+      "explanation": "値を代入しただけではメモリ上のオブジェクトが変わるだけです。medicine.save（または medicine.update(count: …) で一度に）で保存して初めてデータベースに反映されます。"
+    },
+    {
+      "id": "crud-05",
+      "category": "crud",
+      "type": "choice",
+      "question": "編集フォームの送信先を、表示中の記録に合わせたい。edit.erb の form の書き方で正しいのは？",
+      "choices": [
+        "<form action=\"/medicines/<%= @medicine.id %>/update\" method=\"post\">",
+        "<form action=\"/medicines/:id/update\" method=\"post\">",
+        "<form action=\"/medicines/<% @medicine.id %>/update\" method=\"post\">",
+        "<form action=\"/medicines/update\" method=\"get\">"
+      ],
+      "answer": 0,
+      "explanation": "HTML の中に :id と書いてもそのまま送られるだけです。<%= @medicine.id %> で実際の番号を埋め込みます。<% %> だと値が出力されません。"
+    },
+    {
+      "id": "crud-06",
+      "category": "crud",
+      "type": "choice",
+      "question": "記録を削除するルートとして正しいのは？",
+      "choices": [
+        "get '/medicines/:id/delete' do\n  Medicine.find(params[:id])\n  redirect '/'\nend",
+        "post '/medicines/:id/delete' do\n  Medicine.find(params[:id]).destroy\n  redirect '/'\nend",
+        "post '/medicines/delete' do\n  Medicine.destroy\n  redirect '/'\nend",
+        "post '/medicines/:id/delete' do\n  Medicine.all.destroy\n  redirect '/'\nend"
+      ],
+      "answer": 1,
+      "explanation": "find で1件取り出してから destroy します。データを変える操作は post で受けます。Medicine.all.destroy では全件が対象になってしまいます。"
+    },
+    {
+      "id": "login-01",
+      "category": "login",
+      "type": "choice",
+      "question": "ユーザーのパスワードをデータベースに保存するときの考え方で正しいのは？",
+      "choices": [
+        "そのまま password カラムに保存する",
+        "パスワードは保存せず、毎回メールで確認する",
+        "has_secure_password を使い、変換した値を password_digest カラムに保存する",
+        "Cookie に保存する"
+      ],
+      "answer": 2,
+      "explanation": "has_secure_password（bcrypt）を使うと、パスワードは元に戻せない形に変換されて password_digest に入ります。データが漏れても元のパスワードが分かりにくくなります。"
+    },
+    {
+      "id": "login-02",
+      "category": "login",
+      "type": "choice",
+      "question": "session[:user] に値を入れても、次のページで消えてしまう。app.rb に足りない可能性が高いのは？",
+      "choices": [
+        "require 'bcrypt'",
+        "enable :sessions",
+        "has_secure_password",
+        "bundle exec rake db:migrate"
+      ],
+      "answer": 1,
+      "explanation": "Sinatra でセッションを使うには enable :sessions が必要です。これがないと session に入れた値がページをまたいで残りません。"
+    },
+    {
+      "id": "login-03",
+      "category": "login",
+      "type": "choice",
+      "question": "ログイン処理の空欄に入るものは？",
+      "code": "post '/signin' do\n  user = User.find_by(name: params[:name])\n  if ________\n    session[:user] = user.id\n  end\n  redirect '/'\nend",
+      "choices": [
+        "user && user.authenticate(params[:password])",
+        "user.password == params[:password]",
+        "User.authenticate(params[:password])",
+        "user.password_digest == params[:password]"
+      ],
+      "answer": 0,
+      "explanation": "authenticate は入力されたパスワードが正しいかを調べるメソッドです。user && を先に書いておくと、名前が見つからず user が nil のときにエラーにならずに済みます。password_digest は変換後の値なので、入力と直接比べても一致しません。"
+    },
+    {
+      "id": "login-04",
+      "category": "login",
+      "type": "choice",
+      "question": "User.find(id) と User.find_by(name: ...) の違いで正しいのは？",
+      "choices": [
+        "どちらも見つからなければ nil を返す",
+        "find は id 以外でも探せる",
+        "find_by は全件を配列で返す",
+        "find は見つからないとエラーになり、find_by は nil を返す"
+      ],
+      "answer": 3,
+      "explanation": "find は id で探し、見つからないと例外（エラー）になります。find_by は条件で最初の1件を探し、見つからなければ nil を返します。"
+    },
+    {
+      "id": "login-05",
+      "category": "login",
+      "type": "choice",
+      "question": "ログアウトの処理として正しいのは？",
+      "choices": [
+        "User.find(session[:user]).destroy",
+        "session[:user] = nil",
+        "enable :sessions を消す",
+        "redirect '/signout'"
+      ],
+      "answer": 1,
+      "explanation": "session からユーザーの id を消せば、ログインしていない状態に戻ります。destroy はユーザーそのものを削除してしまいます。"
+    },
+    {
+      "id": "login-06",
+      "category": "login",
+      "type": "choice",
+      "question": "ログインした人だけが /mypage を見られるようにしたい。正しい書き方は？",
+      "choices": [
+        "get '/mypage' do\n  redirect '/' if session[:user].nil?\n  erb :mypage\nend",
+        "get '/mypage' do\n  erb :mypage\n  redirect '/' if session[:user].nil?\nend",
+        "get '/mypage' do\n  session[:user] = nil\n  erb :mypage\nend",
+        "get '/mypage' do\n  redirect '/' if session[:user]\n  erb :mypage\nend"
+      ],
+      "answer": 0,
+      "explanation": "ログインしていない（session[:user] が nil）ときは先に redirect します。erb の後ろに書くと、ページを表示した後になるので守れません。"
+    }
+  ]
+}

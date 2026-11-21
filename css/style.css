@@ -396,3 +396,22 @@ body {
     padding: 16px;
   }
 }
+
+.level-link {
+  text-align: center;
+  font-size: 0.875rem;
+  color: #666;
+  margin: 16px 0 0;
+}
+
+.level-link a {
+  color: #4361ee;
+}
+
+.choices .choice-code {
+  white-space: pre;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.875rem;
+  overflow-x: auto;
+  min-width: 0;
+}

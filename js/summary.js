@@ -29,7 +29,8 @@ export function computeCategoryStats(results, categories) {
   return stats;
 }
 
-export function renderSummary(results, categories, elements) {
+export function renderSummary(results, categories, meta, elements) {
+  const msg = meta?.messages || {};
   const total = results.length;
   const correct = results.filter((r) => r.correct).length;
   const rate = total > 0 ? Math.round((correct / total) * 100) : 0;
@@ -37,11 +38,11 @@ export function renderSummary(results, categories, elements) {
   elements.score.textContent = `${correct} / ${total} 問正解（${rate}%）`;
 
   if (rate >= 80) {
-    elements.message.textContent = 'よくできました！Basic コースの内容はしっかり身についています。';
+    elements.message.textContent = msg.high || 'よくできました！Basic コースの内容はしっかり身についています。';
   } else if (rate >= 60) {
-    elements.message.textContent = 'おおむね理解できています。苦手分野を中心にもう一度復習してみましょう。';
+    elements.message.textContent = msg.mid || 'おおむね理解できています。苦手分野を中心にもう一度復習してみましょう。';
   } else {
-    elements.message.textContent = '復習のチャンスです。解説を読みながら、もう一度挑戦してみましょう。';
+    elements.message.textContent = msg.low || '復習のチャンスです。解説を読みながら、もう一度挑戦してみましょう。';
   }
 
   const stats = computeCategoryStats(results, categories);
@@ -69,7 +70,7 @@ export function renderSummary(results, categories, elements) {
     elements.chart.appendChild(row);
 
     if (catRate < 80) {
-      weakList.push({ label: stat.label, tip: CATEGORY_TIPS[key] || '' });
+      weakList.push({ label: stat.label, tip: categories[key].tip || CATEGORY_TIPS[key] || '' });
     }
   }
 
@@ -83,7 +84,7 @@ export function renderSummary(results, categories, elements) {
       ul.appendChild(li);
     }
   } else {
-    elements.weakAreas.innerHTML = '<h3>すべてのカテゴリで良好です</h3><p>この調子で Advanced コースに進みましょう。</p>';
+    elements.weakAreas.innerHTML = `<h3>すべてのカテゴリで良好です</h3><p>${escapeHtml(msg.allGood || 'この調子で Step Up コースに進みましょう。')}</p>`;
     elements.weakAreas.classList.remove('weak-areas');
     elements.weakAreas.style.background = '#d4edda';
     elements.weakAreas.style.borderColor = '#28a745';

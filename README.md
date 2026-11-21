@@ -9,9 +9,18 @@
 
 目安所要時間: **約15分**
 
+### むずかしい版（hard.html）
+
+- 全29問（Basic 応用 8 / データベース設計 4 / ActiveRecord 5 / CRUD 6 / ログイン 6）
+- 範囲: Basic の応用から Step Up の「ログイン」まで（DBアーキテクト2の手前）
+- 目安所要時間: 約30分
+- 問題は `data/questions-hard.json`。カテゴリごとの `tip` とサマリーの文言（`meta.messages`）も JSON に書く
+
 ## 公開 URL（GitHub Pages）
 
 **https://lazyturtle0852.github.io/basic-quiz/**
+
+むずかしい版: **https://lazyturtle0852.github.io/basic-quiz/hard.html**
 
 問題を更新したら `git push` するだけで数分後に反映されます。
 
@@ -120,7 +129,9 @@ basic-quiz/
 │   ├── app.js       # 画面遷移・イベント
 │   ├── quiz.js      # 問題表示・採点
 │   └── summary.js   # サマリー生成
+├── hard.html          # むずかしい版（body の data-questions で JSON を切り替え）
 ├── data/questions.json
+├── data/questions-hard.json
 ├── start.sh           # ローカルLAN配信用
 ├── .github/workflows/pages.yml
 └── README.md
